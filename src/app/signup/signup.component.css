@@ -1,0 +1,62 @@
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+.headerBar {
+    line-height:4em;    
+    background: linear-gradient(to right, rgb(1, 173, 212), rgb(43, 180, 89));
+    height: 113px;
+
+}
+.headerBarInner  {
+    margin-left: 69px;
+    margin-top: 23px;
+    padding-left: 20px;
+
+}
+h1  {
+    color: white;
+ }
+hr.line {
+    background: white;
+    height: 3px;
+    width: 80%;
+}
+input.textone  {
+    height: 50px;
+    border-radius: 16px;
+}
+
+select.textone{
+    height: 50px;
+    border-radius: 16px;
+
+}
+
+.innerback {
+    background-color: #e7e8ea;
+    padding: 80px 0;
+}
+.borderless{
+    border-color: white
+}
+form h1 { 
+    margin: 0 auto; 
+    width:1000px;
+    margin: 0px 100px 100px 100px;
+    }
+.form-up{
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    width: 60%;
+}
+.text{
+    margin-top:  20px;
+}
+.form-row{
+    margin-top: 25px;
+}
+.label{
+    height: 100px;
+    background: white;
+}

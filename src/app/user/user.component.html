@@ -1,0 +1,43 @@
+<div class="row headerBar" >
+    <div class="">
+      <div class="headerBarInner">
+        <h1>User </h1>
+        <hr class="line" align="left" >
+      </div>
+    </div>
+</div>
+<br><br>
+<div class="row">
+    
+    <div class="col-sm-4">
+      <button class="btn btn-primary" (click)="onAdd()">Create Company</button>
+
+    
+        
+  </div>
+<br><br>
+<table class="table mx-2">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Company Name</th>
+        <th scope="col">Created By</th>
+        <th scope="col">Company Address</th>
+        <th scope="col">Status</th>
+  
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of company;index as i;">
+      <tr>
+        <th scope="row">{{i+1}}</th>
+        <td>{{item.data.name}}</td>
+        <td>{{item.data.user.name}}</td>
+        <td>{{item.data.address}}</td>
+        <td *ngIf="item.data.approved === '0'" >Unapproved</td>
+        <td *ngIf="item.data.approved === '1'" >Approved</td>
+
+  
+      </tr>
+     
+    </tbody>
+  </table>

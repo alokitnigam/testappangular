@@ -1,0 +1,62 @@
+
+
+<div class="row mx-auto ">
+  <h1>{{bottomSheetData.type}} Company </h1>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-4"><h2>Enter Details</h2></div>
+</div>
+<br>
+<form (ngSubmit)="onSave(companyform)" #companyform="ngForm">
+  <div class="row">
+    <div class="col-sm-4">Company Name</div>
+    <div class="col-sm-4">
+        <input  type="text" 
+        class="form-control" 
+        ngModel 
+        name="companyname"
+        ngModel
+        required>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-sm-4">Company Address</div>
+    <div class="col-sm-4">
+        <input  type="text" 
+        class="form-control" 
+        ngModel 
+        name="companyaddress"
+        ngModel
+        required>
+    </div>
+    
+  </div>
+  <div class="row" *ngIf="!hidden" >
+      <div class="col-sm-4">Created By</div>
+      <div class="col-sm-4">
+          <input  type="text" 
+          class="form-control" 
+          ngModel 
+          disabled
+          name="createdby"
+          [ngModel]=bottomSheetData.from
+          required
+           >
+      </div>
+    
+  </div>
+<br>
+<br>
+<div class="row mx-auto text-left">
+  <button type="submit" class="btn btn-success a custom">Save</button>
+  <button type="button" class="btn btn-danger a custom">Cancel</button>
+
+</div>
+</form>
+<br>
+<br>
+<br>
+<br>
+<hr>

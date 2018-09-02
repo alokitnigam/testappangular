@@ -1,0 +1,75 @@
+<div class="row headerBar" >
+  <div class="">
+    <div class="headerBarInner">
+      <h1>Admin </h1>
+      <hr class="line" align="left" >
+    </div>
+  </div>
+</div>
+<br><br>
+
+
+<div class="row">
+    
+    <div class="col-sm-4">
+      <button class="btn btn-primary" (click)="onAdd()">Create Company</button>
+
+    </div>
+    <div class="col-sm-3 ml-auto">
+
+      <select class="form-control borderless textone" 
+              name="Select Role"
+              id="sel1"
+              (change)="onChange($event)">
+        <option *ngFor="let o of users">{{o.data.name}}</option>
+      </select>
+      </div>
+  
+        <div class="col-sm-3">
+        <input  type="text" 
+        class="form-control" 
+        [(ngModel)]="cname"
+        placeholder="Company Name"
+        name="companyname"
+        
+        >      
+          <button class="btn btn-light" (click)="search()">Search</button>
+    </div>
+        
+  </div>
+
+<br><br>
+
+
+<table class="table " >
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">S.No.</th>
+      <th scope="col">Company Name</th>
+      <th scope="col">Created By</th>
+      <th scope="col">Company Address</th>
+      <th scope="col" class="text-center" >Actions</th>
+
+    </tr>
+  </thead>
+  <tbody *ngFor="let item of companies;index as i; ">
+    <tr >
+      <th scope="row">{{i+1}}</th>
+      <td>{{item.data.name}}</td>
+      <td>{{item.data.user.name}}</td>
+      <td>{{item.data.address}}</td>
+      <td>
+        <div class="text-center ">
+        <button class="btn btn-primary custom a" (click)="openDialog(item.data.id,item.data.user.id)">Edit</button>
+        <button class="btn btn-primary custom a" (click)="delete(item.data.id)">Delete</button>
+        
+          <button class="btn btn-warning custom a" (click)="approve(item.data.id)" 
+          *ngIf="item.data.approved === '0'">Approve</button>
+        
+      </div>
+      </td>
+
+    </tr>
+   
+  </tbody>
+</table>

@@ -1,0 +1,92 @@
+<div class="row headerBar" >
+  <div class="">
+    <div class="headerBarInner">
+      <h1>Registration</h1>
+      <hr class="line" align="left" >
+    </div>
+  </div>
+</div>
+<div class="row innerback">
+  <div class="col-9 mx-auto" >
+    <form (ngSubmit)="onSubmit(signupform)" #signupform="ngForm">
+      <div class="form-row">
+        <div class="form-group col-md-5 mb-4 mx-auto">
+          <input type="text" 
+                class="form-control textone borderless"
+                placeholder="Name"
+                ngModel name="Name"
+                required>
+        </div>
+        <div class="form-group col-md-5 mb-4 mx-auto">
+          <input type="email" 
+                class="form-control textone borderless" 
+                placeholder="Email"
+                ngModel 
+                name="email"
+                required 
+                email
+                #email=ngModel>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-5 mb-4 mx-auto">
+          <input type="number" 
+                  class="form-control textone borderless" 
+                  placeholder="Mobile Number"
+                  ngModel 
+                  name="mobile" 
+                  required>
+        </div>
+        <div class="form-group col-md-5 mb-4 mx-auto">
+          <input type="text" 
+                class="form-control textone borderless" 
+                placeholder="UserName"
+                ngModel 
+                name="UserName" 
+                required>
+        </div>
+      </div>
+      <div class="form-row">
+          <div class="form-group col-md-5 m-auto">
+            <!-- <input type="text"
+                   class="form-control textone borderless" 
+                   placeholder=""
+                   ngModel 
+                   name="UserName" > -->
+                   <select class="form-control borderless textone" 
+                   name="Select Role"
+                   id="sel1"
+                   [(ngModel)]="selectedOption">
+                     <option *ngFor="let o of options">{{o.name}}</option>
+                   </select>
+          </div>
+          <div class="form-group col-md-5 m-auto">
+            <input type="text" 
+                   class="form-control textone borderless" 
+                   placeholder="Password"
+                   ngModel 
+                   name="password" 
+                   required 
+                   password>
+          </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+            <p class="help-block ml-6 " 
+                *ngIf="!email.valid && email.touched">
+                Please Enter a valid Email!   
+            </p>
+        </div>
+      </div><br>
+      <div class="col-12">
+          <button type="submit" 
+                  class="btn btn-primary btn_default text ml-4"
+                  [disabled]="!signupform.valid">
+                  Register
+          </button>
+      </div>
+    </form>
+</div>
+</div>
+<div class="row label"></div>
+

@@ -1,0 +1,27 @@
+.headerBar {
+    line-height:4em;    
+    background: linear-gradient(to right, rgb(1, 173, 212), rgb(43, 180, 89));
+    height: 113px;
+
+}
+.headerBarInner  {
+    margin-left: 69px;
+    margin-top: 23px;
+    padding-left: 20px;
+
+}
+h1  {
+    color: white;
+ }
+hr.line {
+    background: white;
+    height: 3px;
+    width: 80%;
+}
+button.a{
+    margin: 0 1em;
+ 
+}
+.custom {
+    width: 78px ;
+}
