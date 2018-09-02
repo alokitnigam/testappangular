@@ -1,10 +1,14 @@
 <div class="row headerBar" >
+
   <div class="">
+
     <div class="headerBarInner">
       <h1>Admin </h1>
       <hr class="line" align="left" >
     </div>
   </div>
+  <button class="btn btn-danger signout" (click)="logout()">Sign Out</button>
+
 </div>
 <br><br>
 
@@ -21,7 +25,7 @@
               name="Select Role"
               id="sel1"
               (change)="onChange($event)">
-        <option *ngFor="let o of users">{{o.data.name}}</option>
+        <option *ngFor="let o of users"  [value]="o.data.id">{{o.data.name}}</option>
       </select>
       </div>
   
@@ -31,9 +35,9 @@
         [(ngModel)]="cname"
         placeholder="Company Name"
         name="companyname"
-        
+        #titleInput
         >      
-          <button class="btn btn-light" (click)="search()">Search</button>
+          <button class="btn btn-light" (click)="search(titleInput.value)">Search</button>
     </div>
         
   </div>
@@ -61,7 +65,7 @@
       <td>
         <div class="text-center ">
         <button class="btn btn-primary custom a" (click)="openDialog(item.data.id,item.data.user.id)">Edit</button>
-        <button class="btn btn-primary custom a" (click)="delete(item.data.id)">Delete</button>
+        <button class="btn btn-primary custom a" (click)="delete(item.data.id,i)">Delete</button>
         
           <button class="btn btn-warning custom a" (click)="approve(item.data.id)" 
           *ngIf="item.data.approved === '0'">Approve</button>

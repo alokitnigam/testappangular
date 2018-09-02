@@ -10,6 +10,11 @@
     padding-left: 20px;
 
 }
+.signout{
+    position: absolute;
+    right: 40px;
+    top: 36px;
+}
 h1  {
     color: white;
  }

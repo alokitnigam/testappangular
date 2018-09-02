@@ -1,4 +1,8 @@
 
+<div class="mx-5 mt-5 text-center" *ngIf="router.url == '/'">
+  <button type="button" class="btn btn-primary btn-lg btn-block" (click)="login()">Login </button>
+  <button type="button" class="btn btn-secondary btn-lg btn-block" (click)="signup()">Signup</button>
+</div>
 <div class="container-fluid body-content">
   <router-outlet></router-outlet>
 

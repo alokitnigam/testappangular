@@ -40,7 +40,7 @@ export class DetailsComponent implements OnInit {
       console.log(this.companyform.value);
       if(this.bottomSheetData.type === "Create"){
 
-        this.backend.saveuser(companyDetails).subscribe(
+        this.backend.saveCompany(companyDetails).subscribe(
           (response)=>console.log(response),
         );
       }

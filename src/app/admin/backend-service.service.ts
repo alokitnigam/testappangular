@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
-@Injectable({
-  providedIn: 'root'
-})
+import 'rxjs';
+@Injectable()
 export class BackendServiceService {
    headers = new HttpHeaders({ 'Content-Type': 'application/json' });
    
@@ -22,7 +20,7 @@ export class BackendServiceService {
     return this.http.get("http://localhost:8888/getAllUsers");
   }
 
-  saveuser(comapanyDetails){
+  saveCompany(comapanyDetails){
     console.log(comapanyDetails);
     console.log(JSON.stringify(comapanyDetails));
 
@@ -42,8 +40,20 @@ export class BackendServiceService {
 
   }
 
+  loginUser(values){
+    console.log(values)
   
+    return this.http.post(`http://localhost:8888/login?email=${values.username}&password=${values.password}`, "", {headers:this.headers})
+  }
   
+  companyFilter(id,cname){
+    return this.http.post(`http://localhost:8888/getAllCompaniesFilter?id=${id}&company=${cname}`,"",{headers:this.headers});
 
+  }
+  onRegister(values){
+    return this.http.post(`http://localhost:8888/register?email=${values.email}&password=${values.password}&name=${values.Name}
+    &userType=${values.userType}&mobile=${values.mobile}&username=${values.UserName}`, "", {headers:this.headers})
+
+  }
 
 }

@@ -60,7 +60,11 @@ export class UserComponent implements OnInit {
 
    
   }
-  onAdd(uid){
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
+  onAdd(){
     let matchDetail = {
       c_id: this.id,
       u_id:this.id,

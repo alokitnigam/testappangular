@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material';
 import { DetailsComponent } from '../details/details.component';
 import { BackendServiceService } from './backend-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -13,11 +14,13 @@ export class AdminComponent implements OnInit {
   companies=[];
   users=[];
   cname;
+  name:any;
+  companyselected=false; //company is selected
+  companyValue:String="";    //set selected company value for further
+  id="";
+  all=[];
 
-  
-
-  constructor(public bottomSheet: MatBottomSheet,private backend: BackendServiceService) {
-      
+  constructor(public bottomSheet: MatBottomSheet,private backend: BackendServiceService,private router:Router) {
    }
 
   ngOnInit() {
@@ -51,15 +54,98 @@ export class AdminComponent implements OnInit {
       }))
   }
 
-  public onChange(event): void {  // event will give you full breif of action
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/login']);
+
+  }
+  
+  onChange(event): void {  
     const newVal = event.target.value;
     console.log(newVal);
-  }
-  search(){
-    if(this.cname === ""){
-      console.log("add text")
+    if(newVal !== "undefined"){
+      this.companyselected=true;
+    this.id=newVal;
+     
+      this.companies.splice(0,this.companies.length);
+      this.backend.companyFilter(newVal,"").subscribe(( (data) => {
+
+        console.log(data);
+        if(Object.keys(data).length === 0){
+          console.log("No data found");
+        }
+        else{
+        for (let i = 0; i < Object.keys(data).length; i++) {
+            let newName = {
+                data: {
+                    id: data[i].id,
+                    name:data[i].name,
+                    address: data[i].address,
+                    approved:data[i].approved,
+                    user:{
+                      email:data[i].user.email,
+                      id:data[i].user.id,
+                      mobile:data[i].user.mobile,
+                      name:data[i].user.name,
+                      password:data[i].user.password,
+                      userType:data[i].user.userType
+                    } 
+                     }
+            };
+  
+            this.companies.push(newName);
+          }}
+        })
+      )
+
     }
     else{
+      this.companies=this.all;
+      this.id="";
+    }
+
+    if(this.companyselected){
+      
+    }
+
+  }
+  search(value){
+    if(this.cname !== ""){
+      console.log(value);
+      this.companyValue=value;
+      this.companies.splice(0,this.companies.length);
+      this.backend.companyFilter(this.id,value).subscribe(( (data) => {
+
+        console.log(data);
+        if(Object.keys(data).length === 0){
+          console.log("No data found");
+        }
+        else{
+        for (let i = 0; i < Object.keys(data).length; i++) {
+            let newName = {
+                data: {
+                    id: data[i].id,
+                    name:data[i].name,
+                    address: data[i].address,
+                    approved:data[i].approved,
+                    user:{
+                      email:data[i].user.email,
+                      id:data[i].user.id,
+                      mobile:data[i].user.mobile,
+                      name:data[i].user.name,
+                      password:data[i].user.password,
+                      userType:data[i].user.userType
+                    } 
+                     }
+            };
+  
+            this.companies.push(newName);
+          }}
+        })
+      )
+    }
+    else{
+      this.companyValue="";
     }
   }
   getAllCompanies(){
@@ -87,9 +173,11 @@ export class AdminComponent implements OnInit {
           };
 
           this.companies.push(newName);
+          this.all.push(newName);
         }
       })
     )
+    
   }
   openDialog(id,uid){
     let matchDetail = {
@@ -105,9 +193,9 @@ export class AdminComponent implements OnInit {
   }
  onAdd(){
   let matchDetail = {
-    data: "1111111111111111111111111111",
-    type: 'Create' ,
-    from: 'admin'     //add 
+   
+    u_id: 1,
+    type: 'Create'      //add 
   };
   this.bottomSheet.open(DetailsComponent, {
     data: matchDetail
@@ -115,19 +203,14 @@ export class AdminComponent implements OnInit {
 
  }
 
- delete(id){
+ delete(id,i){
    console.log(id);
-   
+
    this.backend.deletecompany(id).subscribe((
      
        (response) => {
          console.log(response);
-         var index = this.companies.map(function(e){ return e.id;}).indexOf(id);
-                if (index > -1)
-                {
-                    this.companies.splice(index, 1);
-                   
-                }
+         this.companies.splice(i, 1);
       
     })
   );

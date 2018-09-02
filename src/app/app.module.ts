@@ -9,17 +9,19 @@ import { SignupComponent } from './signup/signup.component';
 import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './user/user.component';
 import { DetailsComponent } from './details/details.component';
-import { MatBottomSheetModule } from '@angular/material';
+import { MatBottomSheetModule, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { StorageServiceModule} from 'angular-webstorage-service';
+import { BackendServiceService } from './admin/backend-service.service';
+import { AuthGuard } from './auth.guard';
 
 
 
 const appRoutes: Routes = [
   { path:"login",component:LoginComponent},
   { path:"signup",component:SignupComponent},
-  { path:"admin",component:AdminComponent},
-  { path:"user/:id",component:UserComponent},
+  { path:"admin",component:AdminComponent, canActivate:[AuthGuard]},
+  { path:"user/:id",component:UserComponent, canActivate:[AuthGuard]},
   { path:"detail",component:DetailsComponent},
   
 ];
@@ -41,14 +43,15 @@ const appRoutes: Routes = [
     FormsModule,
     MatBottomSheetModule,
     BrowserAnimationsModule,
-    StorageServiceModule
+    StorageServiceModule,
+    MatDialogModule
     
     
     
     
     
   ],
-  providers: [],
+  providers: [BackendServiceService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

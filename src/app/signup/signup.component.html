@@ -54,10 +54,11 @@
                    ngModel 
                    name="UserName" > -->
                    <select class="form-control borderless textone" 
-                   name="Select Role"
+                   name="userType"
                    id="sel1"
-                   [(ngModel)]="selectedOption">
-                     <option *ngFor="let o of options">{{o.name}}</option>
+                   ngModel
+                 >
+                     <option *ngFor="let o of options" [value]="o.value">{{o.name}}</option>
                    </select>
           </div>
           <div class="form-group col-md-5 m-auto">
